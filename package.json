@@ -1,0 +1,15 @@
+{
+  "name": "nearley-learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nearley-test -i '#00ff00' csscolor.js",
+    "compile": "nearleyc csscolor.ne -o csscolor.js",
+    "generate": "nearley-unparse -n 3 csscolor.js",
+    "railroad": "nearley-railroad csscolor.ne -o csscolor.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
