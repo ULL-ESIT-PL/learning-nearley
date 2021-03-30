@@ -1,0 +1,14 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "calculator.js",
+  "scripts": {
+    "compile": "nearleyc arithmetic.ne -o grammar.js",
+    "compileweb": "nearleyc arithmetic.ne -o grammar.js -e arithmetic",
+    "test": "npm run compile && export NODE_PATH=$NODE_PATH:`npm root -g` && node calculator.js"
+  },
+  "keywords": [],
+  "author": "Casiano Rodriguez Leon <crguezl@ull.edu.es> (https://crguezl.github.io/)",
+  "license": "ISC"
+}
