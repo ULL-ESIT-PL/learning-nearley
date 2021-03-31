@@ -1,0 +1,20 @@
+{
+  "name": "parser-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node use-ambiguous '4 / 2 / 2 /* comment */ - 1'",
+    "compile": "nearleyc ambiguous.ne -o ambiguous.js",
+    "test": "npm run nearley:test",
+    "railroad": "nearley-railroad ambiguous.ne --out ambiguous.html"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "nearley": "latest"
+  },
+  "dependencies": {
+    "moo": "latest",
+    "nearley-moo": "latest"
+  }
+}
