@@ -9,22 +9,20 @@ const lexer = moo.compile(tokens);
 const nearleyMoo = require('nearley-moo');
 
 // Parse something!
-const user = (process.argv.length > 2)? process.argv[2]: null;
-const tests =  [
-    "3\n - 2\n-\n1" ,
-    "2-2"
-];
-if (user) tests.unshift(user);
+const tests = (process.argv.length > 2)? process.argv.slice(2): [
+        "3\n - /* comment */ 2\n-\n1" ,
+        "2-2/2"
+    ];
 
 const nm = nearleyMoo.parser(nearley, grammar);
 try {
     for (let expression of tests) {      
-        const parser = nm(lexer); // need to reset the parser form input to input
+        const parser = nm(lexer); // need to reset the parser from input to input
         parser.ignore(['ws', 'comment']);
 
         parser.feed(expression);
-        // parser.results is an array of possible parsings.
-        console.log(parser.results); 
+        
+        console.log(parser.results); // parser.results is an array of possible parsings
     }   
 } catch(e) {
     console.error(e.message);
