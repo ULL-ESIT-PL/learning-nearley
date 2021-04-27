@@ -1,2 +1,8 @@
 nearley
 examples/walt-learning
+examples/js/*
+examples/compiled-grammars
+package-lock.json
+examples/railroad-experimental
+builtin-nearley-globals
+examples/luna

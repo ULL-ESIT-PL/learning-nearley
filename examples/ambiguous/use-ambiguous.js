@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const moo = require('moo');
 const nearley = require("nearley");
 const grammar = require("./ambiguous.js");
@@ -18,14 +20,14 @@ const nm = nearleyMoo.parser(nearley, grammar);
 try {
     for (let expression of tests) {      
         const parser = nm(lexer); // need to reset the parser from input to input
-        parser.ignore(['ws', 'comment']);
-
+        parser.ignore(['ws', 'comment']); // Despite the name, the instantiation of Parser is intended to be cheap; you shouldn't worry about creating a fresh one each time. In particular, initialising the first column of the table is something that needs to be done afresh for each parse*.
+                                          // See https://github.com/kach/nearley/issues/129
         parser.feed(expression);
         
         console.log(parser.results); // parser.results is an array of possible parsings
     }   
 } catch(e) {
-    console.error(e.message);
+    console.error("Found an error: "+e.message);
 }
 
 
