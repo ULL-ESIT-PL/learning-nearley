@@ -1,15 +1,19 @@
 {
   "name": "nearley-learning",
   "version": "1.0.0",
-  "description": "",
+  "description": "A trivial example of nearley.js use",
   "main": "index.js",
   "scripts": {
     "test": "nearley-test -i '#00ff00' csscolor.js",
     "compile": "nearleyc csscolor.ne -o csscolor.js",
     "generate": "nearley-unparse -n 3 csscolor.js",
-    "railroad": "nearley-railroad csscolor.ne -o csscolor.html"
+    "railroad": "nearley-railroad csscolor.ne -o csscolor.html",
+    "start": "node use_csscolor.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Casiano",
+  "license": "ISC",
+  "dependencies": {
+    "nearley": "latest"
+  }
 }

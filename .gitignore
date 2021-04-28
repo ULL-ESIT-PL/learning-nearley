@@ -6,3 +6,4 @@ package-lock.json
 examples/railroad-experimental
 builtin-nearley-globals
 examples/luna
+*node_modules*

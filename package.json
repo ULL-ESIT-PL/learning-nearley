@@ -1,0 +1,22 @@
+{
+  "name": "nearley-learning",
+  "version": "1.0.0",
+  "description": "Learning Nearley.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "push": "git push origin main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-PL/learning-nearley.git"
+  },
+  "keywords": [],
+  "author": "Casiano Rodriguez Leon <crguezl@ull.edu.es> (https://crguezl.github.io/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-PL/learning-nearley/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-PL/learning-nearley#readme"
+}
