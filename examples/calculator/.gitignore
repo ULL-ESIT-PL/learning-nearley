@@ -1,2 +1,3 @@
 node_modules
 dist/*
+calculator/grammar.js
