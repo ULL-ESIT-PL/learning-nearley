@@ -18,12 +18,12 @@ main => _ AS _ {% function(d) {return d[1]; } %}
 # We define each level of precedence as a nonterminal.
 
 # Addition and subtraction
-AS -> AS _ "+" _ MD {% function(d) {return d[0]+d[4]; } %}
-    | AS _ "-" _ MD {% function(d) {return d[0]-d[4]; } %}
+AS -> AS PLUS MD {% function(d) {return d[0]+d[2]; } %}
+    | AS MINUS MD {% function(d) {return d[0]-d[2]; } %}
     | MD            {% id %}
 
 # Multiplication and division
-MD -> MD _ "*" _ E  {% function(d) {return d[0]*d[4]; } %}
+MD -> MD MULT E  {% function(d) {return d[0]*d[2]; } %}
     | MD _ "/" _ E  {% function(d) {return d[0]/d[4]; } %}
     | E             {% id %}
 
@@ -58,6 +58,8 @@ P -> Q
 
 Q -> _ "(" _ AS _ ")" _ {% function(d) {return d[3]; } %}
 
+## Lexical Analysis
+
 # I use `float` to basically mean a number with a decimal point in it
 float ->
       int "." int   {% function(d) {return parseFloat(d[0] + d[1] + d[2])} %}
@@ -68,3 +70,7 @@ int -> [0-9]:+        {% function(d) {return d[0].join(""); } %}
 # Whitespace. The important thing here is that the postprocessor
 # is a null-returning function. This is a memory efficiency trick.
 _ -> [\s]:*     {% function(d) {return null; } %}
+
+PLUS -> _ "+" _
+MINUS -> _ "-" _
+MULT -> _ "*" _
