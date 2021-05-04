@@ -2,6 +2,8 @@
 
 @{% function TRUE (d) { return true; } %}
 
+S -> P 
+
 P ->
       "(" E ")" {% TRUE %}
     | "{" E "}" {% TRUE %}

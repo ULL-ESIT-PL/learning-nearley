@@ -7,6 +7,10 @@
 #   ln (3 + 2*(8/e - sin(pi/5)))
 # is valid input.
 
+@{%
+const bin = (([x, op, y]) => op(x,y));
+%}
+
 main => null {% d => "" %} # Allow for empty lines
     | AS {% function(d) {return d[0]; } %}
 
@@ -14,7 +18,7 @@ main => null {% d => "" %} # Allow for empty lines
 # We define each level of precedence as a nonterminal.
 
 # Addition and subtraction
-AS -> AS PLUS MD  {% ([as, _, md]) => as+md %}  # Prefer this syntax
+AS -> AS PLUS MD  {% bin %}  # Prefer this syntax
     | AS MINUS MD {% function([as, _, md]) {return as-md; } %}
     | MD          {% id %}
 
@@ -68,8 +72,8 @@ int -> [0-9]:+     {% function(d) {return d[0].join(""); } %}
 # is a null-returning function. This is a memory efficiency trick.
 _ -> [\s]:*        {% function(d) {return null; } %}
 
-PLUS -> _ "+" _    {% function(d) {return null; } %}
-MINUS -> _ "-" _   {% function(d) {return null; } %}
+PLUS -> _ "+" _    {% function(d) {return ((a,b) => a+b); } %}
+MINUS -> _ "-" _   {% function(d) {return ((a,b) => a-b); } %}
 MULT -> _ "*" _    {% function(d) {return null; } %}
 DIV -> _ "/" _     {% function(d) {return null; } %}
 EXP -> _ "^" _     {% function(d) {return null; } %}
