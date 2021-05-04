@@ -7,7 +7,7 @@ nm(tokens)
 
 %}
 
-main ->  e    {% function(d) { return d[0] ; } %}
+main ->  e       {% id %}
 
 e -> e %minus e  {% ([f,_,s]) => { return f-s; } %}
    | e %div e    {% ([f,_,s]) => { return f/s; } %}
