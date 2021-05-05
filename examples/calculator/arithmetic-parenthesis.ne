@@ -12,6 +12,7 @@ const bin = (([x, op, y]) => op(x,y));
 const Null = (d => null);
 const fac = n => (n===0)?1:n*fac(n-1);
 const unaryPost = (([p, op]) => op(p));
+const funApply = ([fun, arg]) => fun(arg);
 %}
 
 main => null {% d => "" %} # Allow for empty lines
@@ -42,7 +43,7 @@ F ->  P FACTORIAL    {% unaryPost %}
 
 P -> Q
     | FLOAT     {% id %}
-    | SIN  Q    {% (d) => {return Math.sin(d.pop()); } %}
+    | SIN  Q    {% funApply %}
     | COS Q     {% (d) => {return Math.cos(d.pop()); } %}
     | TAN Q     {% (d) => {return Math.tan(d.pop()); } %}
     | ASIN Q    {% (d) => {return Math.asin(d.pop()); } %}
@@ -75,10 +76,10 @@ MINUS -> _ "-" _   {% function(d) {return ((a,b) => a-b); } %}
 MULT -> _ "*" _    {% function(d) {return ((a,b) => a*b); } %}
 DIV -> _ "/" _     {% function(d) {return ((a,b) => a/b); } %}
 EXP -> _ "^" _     {% function(d) {return ((a,b) => Math.pow(a,b)); } %}
-FACTORIAL -> "!"    {% d => fac %}
+FACTORIAL -> "!"   {% d => fac %}
 LP -> _ "(" _       {% Null %}
 RP -> _ ")" _       {% Null %}
-SIN -> _ "sin"i _   {% Null %}
+SIN -> _ "sin"i _   {% d => Math.sin %}
 COS -> _ "cos"i _   {% Null %}
 TAN -> _ "tan"i _   {% Null %}
 ASIN -> _ "asin"i _ {% Null %}
