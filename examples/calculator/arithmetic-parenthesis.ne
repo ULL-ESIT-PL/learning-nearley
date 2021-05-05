@@ -1,4 +1,4 @@
-# Adive. How to Implement Lexical Analysis in Tools Whithout a separated Lexer
+# How to Implement Lexical Analysis in Tools Whithout a separated Lexer
 
 # This is a nice little grammar to familiarize yourself
 # with the nearley syntax.
@@ -74,8 +74,8 @@ MINUS -> _ "-" _   {% function(d) {return ((a,b) => a-b); } %}
 MULT -> _ "*" _    {% function(d) {return ((a,b) => a*b); } %}
 DIV -> _ "/" _     {% function(d) {return ((a,b) => a/b); } %}
 EXP -> _ "^" _     {% function(d) {return ((a,b) => Math.pow(a,b)); } %}
-LP -> _ "(" _      {% Null %}
-RP -> _ ")" _      {% Null %}
+LP -> _ "(" _       {% Null %}
+RP -> _ ")" _       {% Null %}
 SIN -> _ "sin"i _   {% Null %}
 COS -> _ "cos"i _   {% Null %}
 TAN -> _ "tan"i _   {% Null %}
