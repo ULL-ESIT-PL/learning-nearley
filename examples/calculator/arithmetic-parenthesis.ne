@@ -53,7 +53,7 @@ P -> Q
     | LN Q      {% (d) => {return Math.log(d.pop()); }  %}
 
 # Parentheses
-Q ->  LP AS RP  {% function(d) {return d[1]; } %}
+Q ->  LP AS RP  {% ([lp, as, rp]) => as %}
 
 ##### LEXICAL ANALYSIS #################################################
 
