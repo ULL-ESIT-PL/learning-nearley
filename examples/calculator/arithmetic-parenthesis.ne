@@ -44,15 +44,15 @@ F ->  P FACTORIAL    {% unaryPost %}
 P -> Q
     | FLOAT     {% id %}
     | SIN  Q    {% funApply %}
-    | COS Q     {% (d) => {return Math.cos(d.pop()); } %}
-    | TAN Q     {% (d) => {return Math.tan(d.pop()); } %}
-    | ASIN Q    {% (d) => {return Math.asin(d.pop()); } %}
-    | ACOS Q    {% (d) => {return Math.acos(d.pop()); } %}
-    | ATAN Q    {% (d) => {return Math.atan(d.pop()); } %}
-    | PI        {% (d) => {return Math.PI; } %}
-    | EULER     {% (d) => {return Math.E; } %}
-    | SQRT Q    {% (d) => {return Math.sqrt(d.pop()); } %}
-    | LN Q      {% (d) => {return Math.log(d.pop()); }  %}
+    | COS Q     {% funApply %}
+    | TAN Q     {% funApply %}
+    | ASIN Q    {% funApply %}
+    | ACOS Q    {% funApply %}
+    | ATAN Q    {% funApply %}
+    | PI        {% id %}
+    | EULER     {% id %}
+    | SQRT Q    {% funApply %}
+    | LN Q      {% funApply %}
 
 # Parentheses
 Q ->  LP AS RP  {% ([lp, as, rp]) => as %}
@@ -80,12 +80,12 @@ FACTORIAL -> "!"   {% d => fac %}
 LP -> _ "(" _       {% Null %}
 RP -> _ ")" _       {% Null %}
 SIN -> _ "sin"i _   {% d => Math.sin %}
-COS -> _ "cos"i _   {% Null %}
-TAN -> _ "tan"i _   {% Null %}
-ASIN -> _ "asin"i _ {% Null %}
-ACOS -> _ "acos"i _ {% Null %}
-ATAN -> _ "atan"i _ {% Null %}
-PI -> _ "pi"i _     {% Null %}
-EULER -> _ "e"i  _  {% Null %}
-SQRT -> _ "sqrt"i _ {% Null %}
-LN -> _ "ln"i _     {% Null %}
+COS -> _ "cos"i _   {% d => Math.cos %}
+TAN -> _ "tan"i _   {% d => Math.tan %}
+ASIN -> _ "asin"i _ {% d => Math.asin %}
+ACOS -> _ "acos"i _ {% d => Math.acos %}
+ATAN -> _ "atan"i _ {% d => Math.atan %}
+PI -> _ "pi"i _     {% d => Math.PI %}
+EULER -> _ "e"i  _  {% d => Math.E  %}
+SQRT -> _ "sqrt"i _ {% d => Math.sqrt %}
+LN -> _ "ln"i _     {% d => Math.log %}
