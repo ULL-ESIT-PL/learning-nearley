@@ -11,6 +11,7 @@
 const bin = (([x, op, y]) => op(x,y));
 const Null = (d => null);
 const fac = n => (n===0)?1:n*fac(n-1);
+const unaryPost = (([p, op]) => op(p));
 %}
 
 main => null {% d => "" %} # Allow for empty lines
@@ -34,7 +35,7 @@ E -> F EXP E    {% bin %}
     | F         {% id %}
 
 # Factorial 
-F ->  P FACTORIAL    {% ([p, _]) => fac(p) %}
+F ->  P FACTORIAL    {% unaryPost %}
     | P              {% id %} 
 
 # Fixed "bug" sinpi
@@ -74,6 +75,7 @@ MINUS -> _ "-" _   {% function(d) {return ((a,b) => a-b); } %}
 MULT -> _ "*" _    {% function(d) {return ((a,b) => a*b); } %}
 DIV -> _ "/" _     {% function(d) {return ((a,b) => a/b); } %}
 EXP -> _ "^" _     {% function(d) {return ((a,b) => Math.pow(a,b)); } %}
+FACTORIAL -> "!"    {% d => fac %}
 LP -> _ "(" _       {% Null %}
 RP -> _ ")" _       {% Null %}
 SIN -> _ "sin"i _   {% Null %}
@@ -86,4 +88,3 @@ PI -> _ "pi"i _     {% Null %}
 EULER -> _ "e"i  _  {% Null %}
 SQRT -> _ "sqrt"i _ {% Null %}
 LN -> _ "ln"i _     {% Null %}
-FACTORIAL -> "!"    {% Null %}
