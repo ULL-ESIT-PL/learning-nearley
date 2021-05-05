@@ -1,6 +1,8 @@
 # This is a nice little grammar to familiarize yourself
 # with the nearley syntax.
-
+# 2*(3+4)
+#2+3*4  2-3*4
+#,m->as => as + md => 2 + md => 2 + 3*4
 # It parses valid calculator input, obeying OOO and stuff.
 #   ln (3 + 2*(8/e - sin(pi/5)))
 # is valid input.
@@ -12,7 +14,12 @@
 # The _'s are defined as whitespace below. This is a mini-
 # -idiom.
 
-main -> _ AS _ {% function(d) {return d[1]; } %}
+main -> null | _ AS _ {% function(d) {return d[1]; } %}
+
+# Addition and subtraction
+AS -> AS _ "+" _ MD {% function(d) {return d[0]+d[4]; } %}
+    | AS _ "-" _ MD {% function(d) {return d[0]-d[4]; } %}
+    | MD            {% id %}
 
 # PEMDAS!
 # We define each level of precedence as a nonterminal.
@@ -38,10 +45,6 @@ MD -> MD _ "*" _ E  {% function(d) {return d[0]*d[4]; } %}
     | MD _ "/" _ E  {% function(d) {return d[0]/d[4]; } %}
     | E             {% id %}
 
-# Addition and subtraction
-AS -> AS _ "+" _ MD {% function(d) {return d[0]+d[4]; } %}
-    | AS _ "-" _ MD {% function(d) {return d[0]-d[4]; } %}
-    | MD            {% id %}
 
 # A number or a function of a number
 N -> float          {% id %}

@@ -9,6 +9,8 @@
 
 @{%
 const bin = (([x, op, y]) => op(x,y));
+const Null = (d => null);
+const fac = n => (n===0)?1:n*fac(n-1);
 %}
 
 main => null {% d => "" %} # Allow for empty lines
@@ -19,41 +21,36 @@ main => null {% d => "" %} # Allow for empty lines
 
 # Addition and subtraction
 AS -> AS PLUS MD  {% bin %}  # Prefer this syntax
-    | AS MINUS MD {% function([as, _, md]) {return as-md; } %}
+    | AS MINUS MD {% bin %}
     | MD          {% id %}
 
 # Multiplication and division
-MD -> MD MULT E  {% function(d) {return d[0]*d[2]; } %}
-    | MD DIV E   {% function(d) {return d[0]/d[2]; } %}
+MD -> MD MULT E  {% bin %}
+    | MD DIV E   {% bin %}
     | E          {% id %}
 
 # Exponents
-E -> F EXP E    {% function(d) {return Math.pow(d[0], d[2]); } %}
-    | F             {% id %}
+E -> F EXP E    {% bin %}
+    | F         {% id %}
 
 # Factorial 
-F ->  P "!"          {% function(d) {
-                          const fac = n => (n===0)?1:n*fac(n-1);
-                          return fac(d[0]); 
-                        } 
-                     %}
+F ->  P "!"          {% ([p, _]) => fac(p) %}
     | P              {% id %} 
 
 # Fixed "bug" sinpi
 
 P -> Q
-    | FLOAT     {% d => d[0] %}
-    | SIN  Q    {% function(d) {return Math.sin(d.pop()); } %}
-    | COS Q     {% function(d) {return Math.cos(d.pop()); } %}
-    | TAN Q     {% function(d) {return Math.tan(d.pop()); } %}
-    
-    | ASIN Q    {% function(d) {return Math.asin(d.pop()); } %}
-    | ACOS Q    {% function(d) {return Math.acos(d.pop()); } %}
-    | ATAN Q    {% function(d) {return Math.atan(d.pop()); } %}
-    | PI        {% function(d) {return Math.PI; } %}
-    | EULER     {% function(d) {return Math.E; } %}
-    | SQRT Q    {% function(d) {return Math.sqrt(d.pop()); } %}
-    | LN Q      {% function(d) {return Math.log(d.pop()); }  %}
+    | FLOAT     {% id %}
+    | SIN  Q    {% (d) => {return Math.sin(d.pop()); } %}
+    | COS Q     {% (d) => {return Math.cos(d.pop()); } %}
+    | TAN Q     {% (d) => {return Math.tan(d.pop()); } %}
+    | ASIN Q    {% (d) => {return Math.asin(d.pop()); } %}
+    | ACOS Q    {% (d) => {return Math.acos(d.pop()); } %}
+    | ATAN Q    {% (d) => {return Math.atan(d.pop()); } %}
+    | PI        {% (d) => {return Math.PI; } %}
+    | EULER     {% (d) => {return Math.E; } %}
+    | SQRT Q    {% (d) => {return Math.sqrt(d.pop()); } %}
+    | LN Q      {% (d) => {return Math.log(d.pop()); }  %}
 
 # Parentheses
 Q ->  LP AS RP  {% function(d) {return d[1]; } %}
@@ -74,18 +71,18 @@ _ -> [\s]:*        {% function(d) {return null; } %}
 
 PLUS -> _ "+" _    {% function(d) {return ((a,b) => a+b); } %}
 MINUS -> _ "-" _   {% function(d) {return ((a,b) => a-b); } %}
-MULT -> _ "*" _    {% function(d) {return null; } %}
-DIV -> _ "/" _     {% function(d) {return null; } %}
-EXP -> _ "^" _     {% function(d) {return null; } %}
-LP -> _ "(" _      {% function(d) {return null; } %}
-RP -> _ ")" _      {% function(d) {return null; } %}
-SIN -> _ "sin" _   {% function(d) {return null; } %}
-COS -> _ "cos" _   {% function(d) {return null; } %}
-TAN -> _ "tan" _   {% function(d) {return null; } %}
-ASIN -> _ "asin" _ {% function(d) {return null; } %}
-ACOS -> _ "acos" _ {% function(d) {return null; } %}
-ATAN -> _ "atan" _ {% function(d) {return null; } %}
-PI -> _ "pi" _     {% function(d) {return null; } %}
-EULER -> _ "e"  _  {% function(d) {return null; } %}
-SQRT -> _ "sqrt" _ {% function(d) {return null; } %}
-LN -> _ "ln" _     {% function(d) {return null; } %}
+MULT -> _ "*" _    {% function(d) {return ((a,b) => a*b); } %}
+DIV -> _ "/" _     {% function(d) {return ((a,b) => a/b); } %}
+EXP -> _ "^" _     {% function(d) {return ((a,b) => Math.pow(a,b)); } %}
+LP -> _ "(" _      {% Null %}
+RP -> _ ")" _      {% Null %}
+SIN -> _ "sin"i _   {% Null %}
+COS -> _ "cos"i _   {% Null %}
+TAN -> _ "tan"i _   {% Null %}
+ASIN -> _ "asin"i _ {% Null %}
+ACOS -> _ "acos"i _ {% Null %}
+ATAN -> _ "atan"i _ {% Null %}
+PI -> _ "pi"i _     {% Null %}
+EULER -> _ "e"i  _  {% Null %}
+SQRT -> _ "sqrt"i _ {% Null %}
+LN -> _ "ln"i _     {% Null %}
