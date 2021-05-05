@@ -29,7 +29,7 @@ P -> "(" _ AS _ ")" {% function(d) {return d[2]; } %}
     | N             {% id %}
 
 # Factorial 
-F ->  P "!"          {% function(d) {
+F ->  P  "!"          {% function(d) {
                           const fac = n => (n===0)?1:n*fac(n-1);
                           return fac(d[0]); 
                         } 

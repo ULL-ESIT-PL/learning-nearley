@@ -34,7 +34,7 @@ E -> F EXP E    {% bin %}
     | F         {% id %}
 
 # Factorial 
-F ->  P "!"          {% ([p, _]) => fac(p) %}
+F ->  P FACTORIAL    {% ([p, _]) => fac(p) %}
     | P              {% id %} 
 
 # Fixed "bug" sinpi
@@ -86,3 +86,4 @@ PI -> _ "pi"i _     {% Null %}
 EULER -> _ "e"i  _  {% Null %}
 SQRT -> _ "sqrt"i _ {% Null %}
 LN -> _ "ln"i _     {% Null %}
+FACTORIAL -> "!"    {% Null %}
