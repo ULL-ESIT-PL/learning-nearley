@@ -1,9 +1,9 @@
 # How to Implement Lexical Analysis in Tools Whithout a separated Lexer
+# To use it run: 
+# nearleyc arithmetic-parenthesis.ne -o grammar.js && export NODE_PATH=$NODE_PATH:`npm root -g` && node calculator.js
+# This is a nice little grammar to familiarize yourself with the nearley syntax.
 
-# This is a nice little grammar to familiarize yourself
-# with the nearley syntax.
-
-# It parses valid calculator input, obeying OOO and stuff.
+# It parses valid calculator input
 #   ln (3 + 2*(8/e - sin(pi/5)))
 # is valid input.
 
