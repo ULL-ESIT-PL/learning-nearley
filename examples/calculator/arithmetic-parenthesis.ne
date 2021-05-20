@@ -50,7 +50,7 @@ P -> Q
     | ACOS Q    {% funApply %}
     | ATAN Q    {% funApply %}
     | PI        {% id %}
-    | EULER     {% id %}
+    | EULER     {% id %}cd l
     | SQRT Q    {% funApply %}
     | LN Q      {% funApply %}
 

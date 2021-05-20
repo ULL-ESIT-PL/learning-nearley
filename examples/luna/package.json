@@ -1,0 +1,38 @@
+{
+  "name": "infix2evm-alu0101138558",
+  "version": "1.0.0",
+  "description": "Convert from infix language to evm",
+  "main": "index.js",
+  "scripts": {
+    "compile": "nearleyc lua.ne -o lua.js",
+    "test": "npm run compile &&  nearley-test -s NameList -i 'id1, id2, id3' -q lua.js",
+    "test2": "nearleyc simple.ne -o simple.js &&  nearley-test  -i 'aaa' -q simple.js",
+    "test3": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) end' -q lua.js",
+    "test4": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) do do end end end' -q lua.js",
+    "test5": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) do do end; do end end end' -q lua.js",
+    "generateAuxTree": "node helperAST.js >> auxiliarTree.txt",
+    "commandtest": "npm run compile; rm auxiliarTree.txt ; npm run generateAuxTree",
+    "cleanTree": "node cleanTree.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-PL-2021/infix2evm-alu0101138558.git"
+  },
+  "keywords": [
+    "npm",
+    "packages",
+    "test",
+    "git-submodules"
+  ],
+  "author": "Adrian Emilio Padilla Rojas <alu0101138558@ull.edu.es> (https://github.com/alu0101138558)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-PL-2021/infix2evm-alu0101138558/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-PL-2021/infix2evm-alu0101138558#readme",
+  "dependencies": {
+    "@ull-esit-pl-2021/egg-alu0101138558": "*",
+    "moo": "^0.5.1",
+    "nearley": "^2.20.1"
+  }
+}
