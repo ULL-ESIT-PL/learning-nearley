@@ -10,6 +10,7 @@
     "test3": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) end' -q lua.js",
     "test4": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) do do end end end' -q lua.js",
     "test5": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) do do end; do end end end' -q lua.js",
+    "test6": "npm run compile; node use-lua.js",
     "generateAuxTree": "node helperAST.js >> auxiliarTree.txt",
     "commandtest": "npm run compile; rm auxiliarTree.txt ; npm run generateAuxTree",
     "cleanTree": "node cleanTree.js"
