@@ -1,5 +1,5 @@
 {
-  "name": "infix2evm-alu0101138558",
+  "name": "infix2evm",
   "version": "1.0.0",
   "description": "Convert from infix language to evm",
   "main": "index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ULL-ESIT-PL-2021/infix2evm-alu0101138558.git"
+    "url": ""
   },
   "keywords": [
     "npm",
@@ -25,14 +25,13 @@
     "test",
     "git-submodules"
   ],
-  "author": "Adrian Emilio Padilla Rojas <alu0101138558@ull.edu.es> (https://github.com/alu0101138558)",
+  "author": "Casiano",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ULL-ESIT-PL-2021/infix2evm-alu0101138558/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/ULL-ESIT-PL-2021/infix2evm-alu0101138558#readme",
+  "homepage": "",
   "dependencies": {
-    "@ull-esit-pl-2021/egg-alu0101138558": "*",
     "moo": "^0.5.1",
     "nearley": "^2.20.1"
   }
