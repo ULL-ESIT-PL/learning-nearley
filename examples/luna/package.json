@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "compile": "nearleyc lua.ne -o lua.js",
-    "test": "npm run compile &&  nearley-test -s NameList -i 'id1, id2, id3' -q lua.js",
+    "test6": "npm run compile &&  nearley-test -s NameList -i 'id1, id2, id3' -q lua.js",
     "test2": "nearleyc simple.ne -o simple.js &&  nearley-test  -i 'aaa' -q simple.js",
     "test3": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) end' -q lua.js",
     "test4": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) do do end end end' -q lua.js",
     "test5": "npm run compile &&  nearley-test -s S -i 'fun (id, idtwo, idthree) do do end; do end end end' -q lua.js",
-    "test6": "npm run compile; node use-lua.js",
+    "test": "npm run compile; node use-lua.js",
     "generateAuxTree": "node helperAST.js >> auxiliarTree.txt",
     "commandtest": "npm run compile; rm auxiliarTree.txt ; npm run generateAuxTree",
     "cleanTree": "node cleanTree.js"
