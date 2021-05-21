@@ -1,20 +1,12 @@
 const moo = require("moo");
-const tokens = require("./tokens");
-const util = require('util');
-const ins = obj => console.log(util.inspect(obj, { depth: null }));
-
 
 // Static Method
 function makeLexer(tokens) {
-  let lexer; // = moo.compile(tokens);
-
-// Wrap the lexer!!
-//const mylexer = Object.create(lexer);
-  let oldnext; // = lexer.next;
+  let lexer; 
+  let oldnext; 
 
   lexer = moo.compile(tokens);
   oldnext = lexer.next;
-
 
   lexer.ignore = function(...types) {
     this.ignore = new Set(types);
@@ -35,19 +27,4 @@ function makeLexer(tokens) {
   return lexer;
 }
 
-/*
-mylexer.next = function () {
-    try {
-        let token = oldnext.call(this);
-        if (token && (token.type === 'ws')) {
-            token = oldnext.call(this);
-        }
-        return token;
-    } catch (e) {
-        console.error("Eh!\n" + e)
-    }
-
-}
-*/
-
-module.exports = {makeLexer, ins};
+module.exports = {makeLexer};

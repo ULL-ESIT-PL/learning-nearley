@@ -1,6 +1,8 @@
 @{%
 const tokens = require("./tokens");
-const { makeLexer, ins } = require("./lexer");
+const { makeLexer } = require("./lexer");
+const util = require('util');
+const ins = obj => console.log(util.inspect(obj, { depth: null }));
 
 let lexer = makeLexer(tokens);
 lexer.ignore("ws");

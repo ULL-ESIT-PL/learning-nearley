@@ -1,6 +1,8 @@
 const nearley = require("nearley");
 const grammar = require("./lua.js");
-const { lexer, ins } = require('./lexer.js');
+const { lexer } = require('./lexer.js');
+const util = require('util');
+const ins = obj => console.log(util.inspect(obj, { depth: null }));
 
 let s = `
 fun (id, idtwo, idthree)  
