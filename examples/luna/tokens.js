@@ -1,4 +1,4 @@
-const moo = require("moo");
+const { moo } = require("moo-ignore");
 
 module.exports = {
     ws: { match: /\s+|#[^\n]*/, lineBreaks: true },

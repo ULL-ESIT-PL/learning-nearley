@@ -33,6 +33,7 @@
   "homepage": "",
   "dependencies": {
     "moo": "^0.5.1",
+    "moo-ignore": "2.0",
     "nearley": "^2.20.1"
   }
 }

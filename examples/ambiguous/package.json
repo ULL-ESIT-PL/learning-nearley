@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node use-ambiguous '4 / 2 / 2 /* comment */ - 1'",
+    "start": "npm run compile  && node use-ambiguous '4 / 2 / 2 /* comment */ - 1'",
     "compile": "nearleyc ambiguous.ne -o ambiguous.js",
     "test": "npm run nearley:test",
     "railroad": "nearley-railroad ambiguous.ne --out ambiguous.html"
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "moo": "latest",
+    "moo-ignore": "^2.3.3",
     "nearley-moo": "latest"
   }
 }

@@ -1,6 +1,6 @@
 @{%
 const tokens = require("./tokens");
-const { makeLexer } = require("./lexer");
+const { makeLexer } = require("moo-ignore");
 const util = require('util');
 const ins = obj => console.log(util.inspect(obj, { depth: null }));
 
