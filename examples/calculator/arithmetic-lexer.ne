@@ -1,8 +1,6 @@
-# How to Implement Lexical Analysis in Tools Whithout a separated Lexer
+# How to Implement Lexical Analysis in Tools with a separated Lexer
 # To use it run: 
-# nearleyc arithmetic-parenthesis.ne -o grammar.js && export NODE_PATH=$NODE_PATH:`npm root -g` && node calculator.js
-# This is a nice little grammar to familiarize yourself with the nearley syntax.
-
+# nearleyc arithmetic-lexer.ne -o grammar.js  && node use-arithmetic.js 'ln (3 + 2*(8/e - sin(pi/5)))'
 # It parses valid calculator input
 #   ln (3 + 2*(8/e - sin(pi/5)))
 # is valid input.
@@ -23,8 +21,6 @@ const funApply = ([fun, arg]) => fun(arg);
 main => null {% d => "" %} # Allow for empty lines
     | AS {% function(d) {return d[0]; } %}
 
-# PEMDAS!
-# We define each level of precedence as a nonterminal.
 
 # Addition and subtraction
 AS -> AS PLUS MD  {% bin %}  # Prefer this syntax
@@ -65,8 +61,7 @@ Q ->  LP AS RP  {% ([lp, as, rp]) => as %}
 
 ##### LEXICAL ANALYSIS #################################################
 
-FLOAT -> %number   {% id %} 
-
+FLOAT -> %number {% d => d[0].value %} 
 PLUS -> "+"      {% function(d) {return ((a,b) => a+b); } %}
 MINUS -> "-"     {% function(d) {return ((a,b) => a-b); } %}
 MULT -> "*"      {% function(d) {return ((a,b) => a*b); } %}

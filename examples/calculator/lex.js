@@ -2,12 +2,13 @@ const { makeLexer, moo } = require("moo-ignore");
 
 const Tokens = {
   space: { match: /\s+/, lineBreaks: true },
-  number: { match: /\d+(?:.\d+)?\b/, value: (x) => Number(x) },
+  number: { match: /\d+(?:\.\d+)?\b/, value: x => Number(x) },
   "+": "+",
   "-": "-",
   "*": "*",
   "/": "/",
   "^": "^",
+  "!": "!",
   "(": "(",
   ")": ")",
   id: {
