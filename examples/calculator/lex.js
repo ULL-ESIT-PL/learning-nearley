@@ -22,7 +22,7 @@ const Tokens = {
       atan: "atan",
       pi: "pi",
       e: "e",
-      sqrty: "sqrt",
+      sqrt: "sqrt",
       ln: "ln"
     }),
   },

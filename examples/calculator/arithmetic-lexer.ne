@@ -61,7 +61,7 @@ Q ->  LP AS RP  {% ([lp, as, rp]) => as %}
 
 ##### LEXICAL ANALYSIS #################################################
 
-FLOAT -> %number {% d => d[0].value %} 
+FLOAT -> %number  
 PLUS -> "+"      {% function(d) {return ((a,b) => a+b); } %}
 MINUS -> "-"     {% function(d) {return ((a,b) => a-b); } %}
 MULT -> "*"      {% function(d) {return ((a,b) => a*b); } %}
@@ -76,7 +76,7 @@ TAN -> "tan"      {% d => Math.tan %}
 ASIN -> "asin"    {% d => Math.asin %}
 ACOS -> "acos"    {% d => Math.acos %}
 ATAN -> "atan"    {% d => Math.atan %}
-PI -> "pi"       {% d => Math.PI %}
-EULER -> "e"      {% d => Math.E  %}
-SQRT -> "sqrt"    {% d => Math.sqrt %}
-LN -> "ln"        {% d => Math.log %}
+PI -> %pi         {% d => Math.PI %}
+EULER -> %e       {% d => Math.E  %}
+SQRT -> %sqrt     {% d => Math.sqrt %}
+LN -> %ln         {% d => Math.log %}
