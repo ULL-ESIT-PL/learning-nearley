@@ -8,6 +8,7 @@
     "compileweb": "nearleyc arithmetic.ne -o grammar.js -e arithmetic",
     "test": "npm run compile && export NODE_PATH=$NODE_PATH:`npm root -g` && node calculator.js",
     "test2": "nearleyc arithmetic-parenthesis.ne -o grammar.js && export NODE_PATH=$NODE_PATH:`npm root -g` && node calculator.js",
+    "test3": "nearleyc arithmetic-lexer.ne -o grammar.js && node calculator.js",
     "node-test": "npm run compile && nearley-test -i '4+2*3' grammar.js"
   },
   "keywords": [],
@@ -18,6 +19,7 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
+    "moo-ignore": "^2.3.3",
     "nearley": "^2.20.1"
   }
 }

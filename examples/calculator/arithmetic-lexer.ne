@@ -8,6 +8,9 @@
 # is valid input.
 
 @{%
+
+const lexer = require('./lex.js');
+
 const bin = (([x, op, y]) => op(x,y));
 const Null = (d => null);
 const fac = n => (n===0)?1:n*fac(n-1);
@@ -15,8 +18,11 @@ const unaryPost = (([p, op]) => op(p));
 const funApply = ([fun, arg]) => fun(arg);
 %}
 
+@lexer lexer
+
+/*
 main => null {% d => "" %} # Allow for empty lines
-    | AS _ {% function(d) {return d[0]; } %}
+    | AS {% function(d) {return d[0]; } %}
 
 # PEMDAS!
 # We define each level of precedence as a nonterminal.
@@ -57,35 +63,27 @@ P -> Q
 # Parentheses
 Q ->  LP AS RP  {% ([lp, as, rp]) => as %}
 
+*/
+
 ##### LEXICAL ANALYSIS #################################################
 
-# I use `float` to basically mean a number with a decimal point in it
-FLOAT -> _ float    {% d => d[1] %} 
-float ->
-      int "." int   {% function(d) {return parseFloat(d[0] + d[1] + d[2])} %}
-	| int           {% function(d) {return parseInt(d[0])} %}
+FLOAT -> %number   {% id %} 
 
-int -> [0-9]:+     {% function(d) {return d[0].join(""); } %}
-
-# Whitespace. The important thing here is that the postprocessor
-# is a null-returning function. This is a memory efficiency trick.
-_ -> [\s]:*        {% function(d) {return null; } %}
-
-PLUS -> _ "+"      {% function(d) {return ((a,b) => a+b); } %}
-MINUS -> _ "-"     {% function(d) {return ((a,b) => a-b); } %}
-MULT -> _ "*"      {% function(d) {return ((a,b) => a*b); } %}
-DIV -> _ "/"       {% function(d) {return ((a,b) => a/b); } %}
-EXP -> _ "^"       {% function(d) {return ((a,b) => Math.pow(a,b)); } %}
+PLUS -> "+"      {% function(d) {return ((a,b) => a+b); } %}
+MINUS -> "-"     {% function(d) {return ((a,b) => a-b); } %}
+MULT -> "*"      {% function(d) {return ((a,b) => a*b); } %}
+DIV -> "/"       {% function(d) {return ((a,b) => a/b); } %}
+EXP -> "^"       {% function(d) {return ((a,b) => Math.pow(a,b)); } %}
 FACTORIAL -> "!"   {% d => fac %}
-LP -> _ "("         {% Null %}
-RP -> _ ")"         {% Null %}
-SIN -> _ "sin"i      {% d => Math.sin %}
-COS -> _ "cos"i      {% d => Math.cos %}
-TAN -> _ "tan"i      {% d => Math.tan %}
-ASIN -> _ "asin"i    {% d => Math.asin %}
-ACOS -> _ "acos"i    {% d => Math.acos %}
-ATAN -> _ "atan"i    {% d => Math.atan %}
-PI -> _ "pi"i        {% d => Math.PI %}
-EULER -> _ "e"i      {% d => Math.E  %}
-SQRT -> _ "sqrt"i    {% d => Math.sqrt %}
-LN -> _ "ln"i        {% d => Math.log %}
+LP -> "("         {% Null %}
+RP -> ")"         {% Null %}
+SIN -> "sin"i      {% d => Math.sin %}
+COS -> "cos"i      {% d => Math.cos %}
+TAN -> "tan"i      {% d => Math.tan %}
+ASIN -> "asin"i    {% d => Math.asin %}
+ACOS -> "acos"i    {% d => Math.acos %}
+ATAN -> "atan"i    {% d => Math.atan %}
+PI -> "pi"i        {% d => Math.PI %}
+EULER -> "e"i      {% d => Math.E  %}
+SQRT -> "sqrt"i    {% d => Math.sqrt %}
+LN -> "ln"i        {% d => Math.log %}
