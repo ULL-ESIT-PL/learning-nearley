@@ -20,7 +20,6 @@ const funApply = ([fun, arg]) => fun(arg);
 
 @lexer lexer
 
-/*
 main => null {% d => "" %} # Allow for empty lines
     | AS {% function(d) {return d[0]; } %}
 
@@ -63,7 +62,6 @@ P -> Q
 # Parentheses
 Q ->  LP AS RP  {% ([lp, as, rp]) => as %}
 
-*/
 
 ##### LEXICAL ANALYSIS #################################################
 
@@ -77,13 +75,13 @@ EXP -> "^"       {% function(d) {return ((a,b) => Math.pow(a,b)); } %}
 FACTORIAL -> "!"   {% d => fac %}
 LP -> "("         {% Null %}
 RP -> ")"         {% Null %}
-SIN -> "sin"i      {% d => Math.sin %}
-COS -> "cos"i      {% d => Math.cos %}
-TAN -> "tan"i      {% d => Math.tan %}
-ASIN -> "asin"i    {% d => Math.asin %}
-ACOS -> "acos"i    {% d => Math.acos %}
-ATAN -> "atan"i    {% d => Math.atan %}
-PI -> "pi"i        {% d => Math.PI %}
-EULER -> "e"i      {% d => Math.E  %}
-SQRT -> "sqrt"i    {% d => Math.sqrt %}
-LN -> "ln"i        {% d => Math.log %}
+SIN -> "sin"      {% d => Math.sin %}
+COS -> "cos"      {% d => Math.cos %}
+TAN -> "tan"      {% d => Math.tan %}
+ASIN -> "asin"    {% d => Math.asin %}
+ACOS -> "acos"    {% d => Math.acos %}
+ATAN -> "atan"    {% d => Math.atan %}
+PI -> "pi"       {% d => Math.PI %}
+EULER -> "e"      {% d => Math.E  %}
+SQRT -> "sqrt"    {% d => Math.sqrt %}
+LN -> "ln"        {% d => Math.log %}
