@@ -8,3 +8,4 @@ builtin-nearley-globals
 examples/luna
 *node_modules*
 *grammar.js
+.DS_Store
