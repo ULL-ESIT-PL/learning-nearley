@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/ULL-ESIT-PL/learning-nearley/issues"
   },
-  "homepage": "https://github.com/ULL-ESIT-PL/learning-nearley#readme"
+  "homepage": "https://github.com/ULL-ESIT-PL/learning-nearley#readme",
+  "dependencies": {
+    "moo": "^0.5.2",
+    "moo-ignore": "^2.5.3",
+    "nearley": "^2.20.1"
+  }
 }

@@ -9,6 +9,6 @@ node use-null.js
 */
 let count = 0; 
 %}
-s -> ("a" {% d => (console.log(`${count++}: ${JSON.stringify(d)}`), d[0]) %}):? 
-     {% d => (console.log(d), d[0]) %}
+s -> ("a" {% d => (console.log(`${count++}: ${JSON.stringify(d)}`), d) %}):? 
+     {% d => (console.log(d), d) %}
     
