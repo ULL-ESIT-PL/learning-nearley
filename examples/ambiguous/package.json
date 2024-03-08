@@ -6,7 +6,6 @@
   "scripts": {
     "start": "npm run compile  && node use-ambiguous '4 / 2 / 2 /* comment */ - 1'",
     "compile": "nearleyc ambiguous.ne -o ambiguous.js",
-    "test": "npm run nearley:test",
     "railroad": "nearley-railroad ambiguous.ne --out ambiguous.html"
   },
   "license": "ISC",
